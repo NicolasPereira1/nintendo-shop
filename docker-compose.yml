@@ -4,7 +4,7 @@ services:
   database:
     image: 'postgres'
     healthcheck:
-      test: ["CMD", "pg_isready", "-h", "127.0.0.1"]
+      test: ["CMD", "pg_isready", "-U", "nintendo", "-h", "127.0.0.1"]
     environment:
       - POSTGRES_USER=nintendo
       - POSTGRES_PASSWORD=nintendo
