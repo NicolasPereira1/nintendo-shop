@@ -3,6 +3,7 @@ package nintendo.shop.user;
 import lombok.AllArgsConstructor;
 import nintendo.shop.dto.LoginDTO;
 import nintendo.shop.dto.TokenDTO;
+import nintendo.shop.exception.UsernameAlreadyUsedException;
 import nintendo.shop.role.RoleEntity;
 import nintendo.shop.role.RoleEnum;
 import nintendo.shop.security.JWTService;
@@ -38,6 +39,8 @@ public class UserService {
         user.setUsername(dto.getUsername());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setRole(role);
+        if(userRepository.findByUsername(user.getUsername()).isPresent())
+            throw new UsernameAlreadyUsedException(user.getUsername());
         userRepository.save(user);
         return "Successfully registered!";
     }
