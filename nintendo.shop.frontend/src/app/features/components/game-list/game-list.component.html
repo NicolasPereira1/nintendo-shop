@@ -1,0 +1,3 @@
+<div *ngFor="let game of games">
+    <app-game-item [item]="game" (itemEmitter)="handleAction($event)"/>
+</div>

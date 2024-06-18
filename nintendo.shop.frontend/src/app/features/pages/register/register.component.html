@@ -1,0 +1,10 @@
+<form class="authForm" [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+  <label>Login:</label>
+  <input type="text" formControlName="username" placeholder="Username" />
+  <label>Password:</label>
+  <input type="password" formControlName="password" placeholder="Password"/>
+  <label>Confirm password:</label>
+  <input type="password" formControlName="confirmedPassword" placeholder="Repeat password"/>
+  <button>Sing up</button>
+  <a routerLink="/login"> Already singed in ?</a>
+</form>

@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  database:
+    image: 'postgres'
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1"]
+    environment:
+      - POSTGRES_USER=nintendo
+      - POSTGRES_PASSWORD=nintendo
+    ports:
+      - 5432:5432
+  backend:
+    build: ./nintendo.shop.backend
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/ping"]
+    volumes:
+      - ./nintendo.shop.backend:/backend
+    ports:
+      - 8080:80
+    depends_on:
+      database:
+       condition: service_healthy
+    environment: 
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=nintendo
+      - SPRING_DATASOURCE_PASSWORD=nintendo
+  frontend:
+    build: ./nintendo.shop.frontend
+    volumes:
+      - ./nintendo.shop.frontend:/frontend
+    ports:
+      - 4200:4200
+    depends_on:
+        backend: 
+          condition: service_healthy

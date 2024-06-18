@@ -1,0 +1,9 @@
+<form class="authForm" [ngClass]="{errorForm: loginForm.errors}" [formGroup]="loginForm" (ngSubmit)="handleSubmit($event)">
+  <label>Username:</label>
+  <input type="text" formControlName="username" placeholder="Username"/>
+  <label>Password:</label>
+  <input type="password" formControlName="password" placeholder="Password"/>
+  <span>{{loginForm.getError('message')}}</span>
+  <button>Sing in</button>
+  <a routerLink="/register"> Need to singed up ?</a>
+</form>
