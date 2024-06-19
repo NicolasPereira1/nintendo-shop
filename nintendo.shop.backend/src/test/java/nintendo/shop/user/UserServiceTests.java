@@ -50,4 +50,3 @@ public class UserServiceTests {
         assertEquals("Successfully registered!", userService.register(dto));
     }
 }
-
