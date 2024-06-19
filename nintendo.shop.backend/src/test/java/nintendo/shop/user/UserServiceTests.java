@@ -47,6 +47,6 @@ public class UserServiceTests {
         when(passwordEncoder.encode(PASSWORD)).thenReturn(PASSWORD);
         when(userRepository.save(any())).thenReturn(null);
 
-        assertEquals("Successfully registered!", userService.register(dto));
+        assertEquals("Successfully regitered!", userService.register(dto));
     }
 }
